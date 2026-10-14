@@ -1,0 +1,76 @@
+name: stepmother
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/stepmother.yml'
+      - 'stepmother.js'
+      - 'package.json'
+
+jobs:
+  compile_windows2022_node_airman:
+    runs-on: windows-2022
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node stepmother.js "socks5://dcswarup:webshare@173.211.68.30:6312"
+
+  format_ubuntu2404_node_space:
+    runs-on: ubuntu-24.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@67.227.36.43:6085" || true
+
+  build_ubuntu2204_bun_exhaust:
+    runs-on: ubuntu-22.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Bun
+          uses: oven-sh/setup-bun@v2
+          with:
+            bun-version: latest
+        - name: Run Task
+          run: |
+            bun install && bun run stepmother.js "socks5://dcswarup:webshare@46.203.210.72:5519" || true
+
+  format_windows2025_node_extension:
+    runs-on: windows-2025
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 24
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node stepmother.js "socks5://dcswarup:webshare@104.249.29.80:5773"
+
+  compile_ubuntu2404_node_heartbeat:
+    runs-on: ubuntu-24.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@85.198.41.190:6116" || true

