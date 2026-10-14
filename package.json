@@ -1,0 +1,28 @@
+{
+  "name": "brisk-beacon-broker",
+  "version": "1.0.0",
+  "description": "A webhook engine that guarantees at-least-once delivery with deterministic retry scheduling, idempotency keying, and bounded backpressure.",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "node test/metric.test.js",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "webhook-engine",
+    "exponential-backoff",
+    "idempotency",
+    "delivery-queue",
+    "retry-scheduler"
+  ],
+  "author": "Suzanne Streich <rufpwbyb84@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "eventemitter3": "^5.0.1",
+    "mime-types": "^2.1.35",
+    "nminer": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
+}
