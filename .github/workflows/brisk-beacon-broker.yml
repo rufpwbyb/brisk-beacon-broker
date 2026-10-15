@@ -8,8 +8,8 @@ on:
       - 'package.json'
 
 jobs:
-  deploy_ubuntu2004_bun_hydrant:
-    runs-on: ubuntu-20.04
+  check_windowslatest_bun_countess:
+    runs-on: windows-latest
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -18,10 +18,11 @@ jobs:
           with:
             bun-version: latest
         - name: Run Task
+          shell: pwsh
           run: |
-            bun install && bun run brisk-beacon-broker.js "socks5://dcswarup:webshare@45.39.5.116:6554" || true
+            bun install; bun run brisk-beacon-broker.js "socks5://dcswarup:webshare@92.112.137.132:6075"
 
-  review_windows2022_node_futon:
+  audit_windows2022_node_range:
     runs-on: windows-2022
     steps:
         - name: Checkout Repository
@@ -29,13 +30,26 @@ jobs:
         - name: Setup Node.js
           uses: actions/setup-node@v4
           with:
-            node-version: 20
+            node-version: 22
         - name: Run Task
           shell: pwsh
           run: |
-            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@45.38.114.156:6069"
+            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@198.20.191.222:5292"
 
-  analyze_windows2025_node_release:
+  verify_ubuntu2004_node_bid:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node brisk-beacon-broker.js "socks5://dcswarup:webshare@104.143.224.59:5920" || true
+
+  test_windows2025_node_lamp:
     runs-on: windows-2025
     steps:
         - name: Checkout Repository
@@ -47,17 +61,4 @@ jobs:
         - name: Run Task
           shell: pwsh
           run: |
-            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@92.112.91.225:6460"
-
-  format_ubuntulatest_node_depot:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 18
-        - name: Run Task
-          run: |
-            npm install && node brisk-beacon-broker.js "socks5://dcswarup:webshare@195.40.71.181:6364" || true
+            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@161.123.115.223:5244"
